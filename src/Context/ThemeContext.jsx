@@ -4,12 +4,13 @@ import { themeOptions } from "../Utils/theme";
 const ThemeContext = createContext();
 
 export const ThemeContextProvider = ({children}) =>{
-
+ 
     const defaultTheme = JSON.parse(localStorage.getItem('theme')) || themeOptions[2].value ;
     const [theme, setTheme] = useState(defaultTheme);
+    
     const values = {
         theme, 
-        setTheme,
+        setTheme, 
         defaultTheme
     }
 
