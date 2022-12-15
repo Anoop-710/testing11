@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { ThemeProvider } from "styled-components";
+import Footer from "./Components/Footer";
+import TypingBox from "./Components/TypingBox";
+import { useTheme } from "./Context/ThemeContext";
+import { GlobalStyles } from "./Styles/global";
+
+var randomWords =  require('random-words');
 
 function App() {
+
+  const {theme} = useTheme();
+  const words = randomWords(100);
+
+  // useEffect(()=>{
+  //   console.log("theme in app", theme);
+  // },[theme]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <ThemeProvider theme={theme}>
+      <div className="canvas">
+        <GlobalStyles/>
+        <h1>Typing Test</h1>
+        <TypingBox words={words}/>
+        <Footer/>
+      </div>
+    </ThemeProvider>
+    
   );
 }
 
