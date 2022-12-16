@@ -1,5 +1,6 @@
 import { wordsList } from 'random-words';
 import React, { createRef, useEffect, useRef, useState } from 'react'
+import Stats from './Stats';
 
 const TypingBox = ({words}) => {
 
@@ -8,17 +9,61 @@ const TypingBox = ({words}) => {
 
     const [currCharIndex, setCurrCharIndex] = useState(0);
     const [currWordIndex, setCurrWordIndex] = useState(0);
+    const [countDown,setCountDown] = useState(5);
+    const [testStart,setTestStart] = useState(false);
+    const [testEnd,setTestEnd] = useState(false);
+    const [testTime, setTestTime] = useState(15);
+    const [correctChars, setCorrectChars] = useState(0);
+    const [correctWords, setCorrectWords] = useState(0);
+    const [incorrectChars, setIncorrectChar] = useState(0);
+    const [missedChars, setMissedChars] = useState(0);
+    const [extraChars, setExtraChars] = useState(0);
+
 
     const inputRef = useRef(null);
     const wordSpanRef = Array(words.length).fill(0).map(i=>createRef(null));
+
+    //Setting timer
+    
+   const startTimer = ()=>{
+
+        const intervalId = setInterval(timer, 1000);
+
+        function timer(){
+            // console.log("timer function is working");
+            setCountDown((prevCountDown)=>{
+                if(prevCountDown===1){
+                    setTestEnd(true);
+                    clearInterval(intervalId);
+                    return 0;
+                }
+                return prevCountDown-1;
+            });
+        }
+
+    }
 
     const handleKeyDown = (e)=>{
         
         let allChildSpans = wordSpanRef[currWordIndex].current.childNodes;
 
+        // Start testTime
+        if(!testStart){
+            startTimer();
+            setTestStart(true);
+        }
 
         //logic for space press -> increase my currWordIndex by 1
         if(e.keyCode===32){
+
+
+            // Counting the number of correct words to calculate the accuracy
+            const correctChars = wordSpanRef[currWordIndex].current.querySelectorAll('.correct');
+
+            if(correctChars.length === allChildSpans.length){
+                setCorrectWords(correctWords+1);
+            }
+
 
             //removing cursor
             if(allChildSpans.length<=currCharIndex){
@@ -27,6 +72,10 @@ const TypingBox = ({words}) => {
             }
             else{
                 //cursor in between
+
+                setMissedChars(missedChars+(allChildSpans.length-currCharIndex));       //Updating missedChars
+
+
                 for(let i=currCharIndex;i<allChildSpans.length;i++){
                     allChildSpans[i].className+=' skipped';
                 }
@@ -76,6 +125,8 @@ const TypingBox = ({words}) => {
         if(currCharIndex === allChildSpans.length){
             //add new extra characters
 
+            setExtraChars(extraChars+1);    //if extra characters are added by the user
+
             let newSpan = document.createElement('span'); // -> <span></span>
             newSpan.innerText = e.key;
             newSpan.className = 'char incorrect extra right-current';
@@ -88,9 +139,11 @@ const TypingBox = ({words}) => {
 
         if(e.key===allChildSpans[currCharIndex].innerText){
             allChildSpans[currCharIndex].className = 'char correct';
+            setCorrectChars(correctChars+1);
         }
         else{
             allChildSpans[currCharIndex].className = 'char incorrect';
+            setIncorrectChar(incorrectChars+1);
         }
         if(currCharIndex+1 === allChildSpans.length){
             allChildSpans[currCharIndex].className+=' right-current';
@@ -103,6 +156,14 @@ const TypingBox = ({words}) => {
 
     }
 
+
+    const calculateWPM = ()=>{
+        return Math.round((correctChars/5)/(testTime/60))
+    }
+
+    const calculateAccuracy = ()=>{
+        return Math.round((correctWords/currWordIndex)*100);
+    }
 
     const focusInput = ()=>{
         inputRef.current.focus();
@@ -117,17 +178,32 @@ const TypingBox = ({words}) => {
 
   return (
     <div>
-        <div className="type-box" onClick={focusInput}>
-            <div className="words">
-                {words.map((word,index)=>(
-                    <span className='word' ref={wordSpanRef[index]} key={index}>
-                        {word.split('').map((char,ind)=>(
-                            <span className='char' key={ind}>{char}</span>
-                        ))}
-                    </span>
-                ))}
-            </div>
-        </div>
+
+{countDown}
+              {(testEnd) ? (<Stats 
+                                wpm={calculateWPM()} 
+                                accuracy={calculateAccuracy()} 
+                                correctChars={correctChars} 
+                                incorrectChars={incorrectChars}
+                                missedChars={missedChars} 
+                                extraChars={extraChars}/>) :
+                  (
+                    <div className="type-box" onClick={focusInput}>
+                      <div className="words">
+                          {words.map((word, index) => (
+                              <span className='word' ref={wordSpanRef[index]} key={index}>
+                                  {word.split('').map((char, ind) => (
+                                      <span className='char' key={ind}>{char}</span>
+                                  ))}
+                              </span>
+                          ))}
+                      </div>
+                      </div>
+                  )
+              }
+
+
+        
         <input
             type='text'
             className='hidden-input'
