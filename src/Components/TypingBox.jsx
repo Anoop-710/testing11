@@ -1,4 +1,4 @@
-import { wordsList } from 'random-words';
+// import { wordsList } from 'random-words';
 import React, { createRef, useEffect, useRef, useState } from 'react'
 import Stats from './Stats';
 
