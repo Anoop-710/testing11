@@ -1,6 +1,8 @@
-// import { wordsList } from 'random-words';
+import { wordsList } from 'random-words';
 import React, { createRef, useEffect, useRef, useState } from 'react'
 import Stats from './Stats';
+import { useTestMode } from '../Context/TestModeContext';
+import UpperMenu from './UpperMenu';
 
 const TypingBox = ({words}) => {
 
@@ -18,6 +20,8 @@ const TypingBox = ({words}) => {
     const [incorrectChars, setIncorrectChar] = useState(0);
     const [missedChars, setMissedChars] = useState(0);
     const [extraChars, setExtraChars] = useState(0);
+    const [graphData, setGraphData] = useState([]);
+    const {testSeconds} = useTestMode();
 
 
     const inputRef = useRef(null);
@@ -27,16 +31,28 @@ const TypingBox = ({words}) => {
     
    const startTimer = ()=>{
 
+        
+
         const intervalId = setInterval(timer, 1000);
 
         function timer(){
             // console.log("timer function is working");
             setCountDown((prevCountDown)=>{
-                if(prevCountDown===1){
-                    setTestEnd(true);
-                    clearInterval(intervalId);
-                    return 0;
-                }
+                
+
+                    //Graph data
+                    setCorrectChars((correctChars)=>{
+                        setGraphData((data)=>{
+                            return [...data, [testTime-prevCountDown,Math.round((correctChars/5)/((testTime-prevCountDown+1)/60))]];
+                        });
+                        return correctChars;
+                    })
+
+                    if(prevCountDown===1){
+                        setTestEnd(true);
+                        clearInterval(intervalId);
+                        return 0;
+                    }
                 return prevCountDown-1;
             });
         }
@@ -175,18 +191,26 @@ const TypingBox = ({words}) => {
     },[]);
 
 
+    useEffect(()=>{
+        setCountDown(testSeconds);
+        setTestTime(testSeconds);
+    },[testSeconds])
+
+
 
   return (
     <div>
-
-{countDown}
+            <UpperMenu countDown={countDown}/>
               {(testEnd) ? (<Stats 
                                 wpm={calculateWPM()} 
                                 accuracy={calculateAccuracy()} 
                                 correctChars={correctChars} 
                                 incorrectChars={incorrectChars}
                                 missedChars={missedChars} 
-                                extraChars={extraChars}/>) :
+                                extraChars={extraChars}
+                                graphData={graphData}
+                                />
+                                ) :
                   (
                     <div className="type-box" onClick={focusInput}>
                       <div className="words">

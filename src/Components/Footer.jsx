@@ -12,14 +12,27 @@ const Footer = () => {
         setTheme(e.value);
         localStorage.setItem('theme', JSON.stringify(e.value));
     }
+ 
+    
+    const customStyles = {
+      option: (styles, state) => ({
+        ...styles,
+        cursor: 'pointer',
+      }),
+      control: (styles) => ({
+        ...styles,
+        cursor: 'pointer',
+      }),
 
-
+    }
   return (
     <div className='footer'>
 
     
       <div className="links">
+      <a href='https://google.com'>
           <GitHubIcon style={{marginRight:'4px'}}/>
+      </a>
           
       </div>
       <div className="themes">
@@ -28,6 +41,7 @@ const Footer = () => {
               onChange={handleThemeChange}
               menuPlacement='top'
               defaultValue={{value:defaultTheme, label: defaultTheme.label}}
+              styles={customStyles}
           />
       </div>
         

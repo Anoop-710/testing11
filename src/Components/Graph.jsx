@@ -1,5 +1,6 @@
 import React from 'react'
 import {Line} from 'react-chartjs-2';
+import { useTheme } from '../Context/ThemeContext';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -21,24 +22,36 @@ ChartJS.register(
     Legend
 );
 
-const Graph = () => {
+const Graph = ({graphData}) => {
+    const {theme} = useTheme();
   return (
     <div>
         <Line 
             data={
                 {
-                    labels: [1,2,3,4,5],
+                    labels: graphData.map(i=>i[0]+1),
                     datasets: [
-                        {
-                            data: [6,7,8,9,10],
-                            label: 'random data',
-                            borderColor: 'gold'
-                        },
+                        
+
                         {
                             data: [10,9,8,7,6],
                             label: 'random data2',
-                            borderColor: 'green'
+                            // borderColor: 'green',
+                            data: graphData.map(i=>i[1]),
+                            label: 'wpm',
+                            borderColor: theme.title,
+                        },
+
+
+                        {
+                            data: [10,9,8,7,6],
+                            label: 'random data2',
+                            borderColor: 'yellow',
+                            data: graphData.map(i=>i[1]),
+                            label: 'accuracy',
+                            borderColor: theme.title,
                         }
+                        
                     ]
                 }
             }   
