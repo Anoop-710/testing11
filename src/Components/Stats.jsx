@@ -1,7 +1,7 @@
 import React from 'react'
 import Graph from './Graph'
 
-const Stats = ({wpm, accuracy, correctChars, incorrectChars, missedChars, extraChars, graphData}) => {
+const Stats = ({wpm, accuracy, correctChars, incorrectChars, missedChars, extraChars, graphData, accuData}) => {
     var timeSet = new Set();        //Set allows us to store unique values
     const newGraph = graphData.filter((i)=>{
         
@@ -13,6 +13,16 @@ const Stats = ({wpm, accuracy, correctChars, incorrectChars, missedChars, extraC
             return i;
         }
     })
+
+    // const newAccuData = accuData.filter((i)=>{
+       
+    //     if(!timeSet.has(i[0])){
+    //         timeSet.add(i[0]);
+            
+    //         return i;
+    //     }
+    // })
+    console.log(accuData);
   return (
     <div className='stats-box'>
         <div className="left-stats"> WPM
@@ -33,7 +43,7 @@ const Stats = ({wpm, accuracy, correctChars, incorrectChars, missedChars, extraC
             </div>
         </div>
         <div className="right-stats">
-            <Graph graphData ={newGraph}/>
+            <Graph graphData ={newGraph} />
         </div>
     </div>
   )

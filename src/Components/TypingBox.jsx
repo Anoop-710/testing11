@@ -22,7 +22,7 @@ const TypingBox = ({words}) => {
     const [extraChars, setExtraChars] = useState(0);
     const [graphData, setGraphData] = useState([]);
     const {testSeconds} = useTestMode();
-
+    const [accuData, setAccuData] = useState([]);
 
     const inputRef = useRef(null);
     const wordSpanRef = Array(words.length).fill(0).map(i=>createRef(null));
@@ -45,8 +45,13 @@ const TypingBox = ({words}) => {
                         setGraphData((data)=>{
                             return [...data, [testTime-prevCountDown,Math.round((correctChars/5)/((testTime-prevCountDown+1)/60))]];
                         });
+
+                        
                         return correctChars;
                     })
+
+                   
+                    
 
                     if(prevCountDown===1){
                         setTestEnd(true);
@@ -58,6 +63,15 @@ const TypingBox = ({words}) => {
         }
 
     }
+
+     // Accudata
+    //  setCorrectWords((correctWords)=>{
+    //     setAccuData((data)=>{
+    //         return[...data,[Math.round((correctWords/currWordIndex)*100)]]
+    //     });
+    //     return correctWords;
+    // })
+
 
     const handleKeyDown = (e)=>{
         
@@ -209,6 +223,7 @@ const TypingBox = ({words}) => {
                                 missedChars={missedChars} 
                                 extraChars={extraChars}
                                 graphData={graphData}
+                                accuData =  {accuData}
                                 />
                                 ) :
                   (

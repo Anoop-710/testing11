@@ -22,7 +22,7 @@ ChartJS.register(
     Legend
 );
 
-const Graph = ({graphData}) => {
+const Graph = ({graphData, accuData}) => {
     const {theme} = useTheme();
   return (
     <div>
@@ -41,21 +41,15 @@ const Graph = ({graphData}) => {
                             label: 'wpm',
                             borderColor: theme.title,
                         },
-
-
-                        {
-                            data: [10,9,8,7,6],
-                            label: 'random data2',
-                            borderColor: 'yellow',
-                            data: graphData.map(i=>i[1]),
-                            label: 'accuracy',
-                            borderColor: theme.title,
-                        }
                         
                     ]
                 }
-            }   
+
+
+            }
         />
+        
+        
     </div>
   )
 }
