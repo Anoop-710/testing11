@@ -1,8 +1,12 @@
-import React from 'react'
+import React ,{useEffect} from 'react'
 import Graph from './Graph'
+import {auth, db} from '../firebaseConfig';
+import { useAlert } from '../Context/AlertContext';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
-const Stats = ({wpm, accuracy, correctChars, incorrectChars, missedChars, extraChars, graphData, accuData}) => {
+const Stats = ({wpm, accuracy, correctChars, incorrectChars, missedChars, extraChars, graphData,}) => {
     var timeSet = new Set();        //Set allows us to store unique values
+    const {setAlert} = useAlert();
     const newGraph = graphData.filter((i)=>{
         
         // if the timer array has repeated elements at ith time , it will be filtered out by filter function
@@ -14,15 +18,48 @@ const Stats = ({wpm, accuracy, correctChars, incorrectChars, missedChars, extraC
         }
     })
 
-    // const newAccuData = accuData.filter((i)=>{
-       
-    //     if(!timeSet.has(i[0])){
-    //         timeSet.add(i[0]);
-            
-    //         return i;
-    //     }
-    // })
-    console.log(accuData);
+    
+
+
+    // Push the users result to the firebase
+    
+    const [user] = useAuthState(auth);
+    const pushResultToDatabase = async()=>{
+        const resultRef = db.collection('Results');
+        const {uid} = auth.currentUser;
+
+        await resultRef.add({
+            wpm: wpm,
+            accuracy: accuracy,
+            characters: `${correctChars}/${incorrectChars}/${missedChars}/${extraChars}`,
+            userID: uid,
+            timeStamp: new Date()
+        }).then((response)=>{
+            setAlert({
+                open: true,
+                type: 'success',
+                message: 'Result save to database'
+            });
+        })
+    }
+
+    useEffect(()=>{
+
+        if(user){
+            //saving because user is logged in;
+            pushResultToDatabase();
+        }
+        else{
+            //no user, no save
+            setAlert({
+                open: true,
+                type: 'warning',
+                message: 'login to save results'
+            });
+        }
+        
+    },[]);
+    
   return (
     <div className='stats-box'>
         <div className="left-stats"> WPM

@@ -30,7 +30,7 @@ const Footer = () => {
 
     
       <div className="links">
-      <a href='https://google.com'>
+      <a href='https://github.com/'>
           <GitHubIcon style={{marginRight:'4px'}}/>
       </a>
           

@@ -6,33 +6,24 @@ import { useTheme } from "./Context/ThemeContext";
 import { GlobalStyles } from "./Styles/global";
 import { auth } from './firebaseConfig';
 import Header from "./Components/Header";
+import HomePage from "./Pages/HomePage";
+import UserPage from "./Pages/UserPage";
+import {Routes,Route} from 'react-router-dom';
+import Alert from "./Components/Alert";
+import { AlertContextProvider } from "./Context/AlertContext";
 
-var randomWords =  require('random-words');
 
 function App() {
 
-  console.log(process.env)
-  // console.log(auth);
-  console.log("hello");
-
-  const {theme} = useTheme();
-  const words = randomWords(100);
-
-  // useEffect(()=>{
-  //   console.log("theme in app", theme);
-  // },[theme]);
-
   return (
 
-    <ThemeProvider theme={theme}>
-      <div className="canvas">
-        <GlobalStyles/>
-        <Header/>
-        <h1>Typing Test</h1>
-        <TypingBox words={words}/>
-        <Footer/>
-      </div>
-    </ThemeProvider>
+    <>
+      <Alert />
+      <Routes>
+        <Route path='/' element={<HomePage/>}   />
+        <Route path='/user' element={<UserPage/>} />
+      </Routes>
+    </>
     
   );
 }
