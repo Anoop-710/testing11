@@ -2,7 +2,7 @@ import { Box, Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { auth } from '../firebaseConfig';
 import { useAlert } from '../Context/AlertContext';
-import { useTheme } from 'styled-components';
+import { useTheme } from '../Context/ThemeContext';
 import errorMapping from '../Utils/errorMapping';
 
 
@@ -57,7 +57,7 @@ const LoginForm = ({handleClose}) => {
             // css in material ui , target the label props
             InputLabelProps={{
                 style:{
-                    color: theme.color
+                    color: theme.title
                 }
             }}
 
@@ -67,6 +67,7 @@ const LoginForm = ({handleClose}) => {
                 }
             }}
             onChange={(e)=>setEmail(e.target.value)}/>
+
         <TextField
             type='password'
             variant='outlined'
@@ -74,7 +75,7 @@ const LoginForm = ({handleClose}) => {
 
             InputLabelProps={{
                 style:{
-                    color: theme.color
+                    color: theme.title
                 }
             }}
 

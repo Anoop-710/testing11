@@ -11,7 +11,7 @@ import {useAuthState} from 'react-firebase-hooks/auth';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import { useAlert } from '../Context/AlertContext';
-
+import { useTheme } from '../Context/ThemeContext'
 
 const useStyles = makeStyles(()=>({
     modal: {

@@ -2,8 +2,9 @@ import { Box, Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { auth } from '../firebaseConfig';
 import { useAlert } from '../Context/AlertContext';
-import { useTheme } from 'styled-components';
+import { useTheme } from '../Context/ThemeContext';
 import errorMapping from '../Utils/errorMapping';
+import { themeOptions } from '../Utils/theme';
 
 const SignupForm = () => {
 
@@ -84,7 +85,7 @@ const SignupForm = () => {
 
             InputLabelProps={{
                 style:{
-                    color: theme.color
+                    color: theme.title
                 }
             }}
 
@@ -102,7 +103,7 @@ const SignupForm = () => {
 
             InputLabelProps={{
                 style:{
-                    color: theme.color
+                    color: theme.title
                 }
             }}
 
@@ -120,7 +121,7 @@ const SignupForm = () => {
 
             InputLabelProps={{
                 style:{
-                    color: theme.color
+                    color: theme.title
                 }
             }}
 
