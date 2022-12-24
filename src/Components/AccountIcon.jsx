@@ -122,6 +122,7 @@ const AccountIcon = () => {
         });
     } 
 
+    const { theme } = useTheme();
     const classes = useStyles();
     console.log(classes);
     console.log(value);
@@ -144,8 +145,8 @@ const AccountIcon = () => {
                         onChange={handleValueChange}
                         variant='fullWidth'
                     >
-                        <Tab label='login'></Tab>
-                        <Tab label='signup'></Tab>
+                        <Tab label='login' style={{color: theme.title}} ></Tab>
+                        <Tab label='signup' style={{color: theme.title}} ></Tab>
                     </Tabs>
                 </AppBar>
                 {value===0 && <LoginForm handleClose={handleClose} />}

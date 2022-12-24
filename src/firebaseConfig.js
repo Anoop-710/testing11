@@ -13,14 +13,7 @@ import 'firebase/compat/firestore';
 // }
 
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAUtwe3gChKRsJBSy2VoNHdA_04ykeYeN0",
-    authDomain: "typing-speed-test-f012c.firebaseapp.com",
-    projectId: "typing-speed-test-f012c",
-    storageBucket: "typing-speed-test-f012c.appspot.com",
-    messagingSenderId: "912517569762",
-    appId: "1:912517569762:web:67a19810ba35cb2c68d2bb"
-  };
+
 
 const firebaseApp  = firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();

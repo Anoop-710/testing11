@@ -24,23 +24,35 @@ const Stats = ({wpm, accuracy, correctChars, incorrectChars, missedChars, extraC
     // Push the users result to the firebase
     
     const [user] = useAuthState(auth);
-    const pushResultToDatabase = async()=>{
+    const pushResultToDatabase = ()=>{
         const resultRef = db.collection('Results');
         const {uid} = auth.currentUser;
 
-        await resultRef.add({
-            wpm: wpm,
-            accuracy: accuracy,
-            characters: `${correctChars}/${incorrectChars}/${missedChars}/${extraChars}`,
-            userID: uid,
-            timeStamp: new Date()
-        }).then((response)=>{
+        if(!isNaN(accuracy)){
+
+            resultRef.add({
+                wpm: wpm,
+                accuracy: accuracy,
+                characters: `${correctChars}/${incorrectChars}/${missedChars}/${extraChars}`,
+                userID: uid,
+                timeStamp: new Date()
+            }).then((response)=>{
+                setAlert({
+                    open: true,
+                    type: 'success',
+                    message: 'Result save to database'
+                });
+            })
+        }
+
+        else{
             setAlert({
                 open: true,
-                type: 'success',
-                message: 'Result save to database'
+                type: 'error',
+                message: 'invalid test',
             });
-        })
+        }
+        
     }
 
     useEffect(()=>{

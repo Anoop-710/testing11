@@ -17,7 +17,7 @@ var randomWords =  require('random-words');
 
 
 const HomePage = () => {
-    const {theme} = useTheme();
+    
     const words = randomWords(100);
 
     // useEffect(()=>{
@@ -25,15 +25,15 @@ const HomePage = () => {
   // },[theme]);
   return (
     <div>
-        <ThemeProvider theme={theme}>
+        
       <div className="canvas">
-        <GlobalStyles/>
+      
         <Header/>
         <h1>Typing Test</h1>
         <TypingBox words={words}/>
         <Footer/>
       </div>
-    </ThemeProvider>
+    
     </div>
   )
 }
