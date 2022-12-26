@@ -11,7 +11,7 @@ import UserPage from "./Pages/UserPage";
 import {Routes,Route} from 'react-router-dom';
 import Alert from "./Components/Alert";
 import { AlertContextProvider } from "./Context/AlertContext";
-
+import ComparePage from "./Pages/ComparePage";
 
 function App() {
 
@@ -24,6 +24,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage/>}   />
         <Route path='/user' element={<UserPage/>} />
+        <Route path='/compare/:username' element={<ComparePage/>} /> 
       </Routes>
     </ThemeProvider>
     

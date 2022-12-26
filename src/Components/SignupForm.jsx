@@ -1,22 +1,33 @@
 import { Box, Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
-import { auth } from '../firebaseConfig';
+import { auth,db } from '../firebaseConfig';
 import { useAlert } from '../Context/AlertContext';
 import { useTheme } from '../Context/ThemeContext';
 import errorMapping from '../Utils/errorMapping';
 import { themeOptions } from '../Utils/theme';
 
-const SignupForm = () => {
+const SignupForm = ({handleClose}) => {
 
 
   const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [username, setUsername] = useState('');
     const {setAlert} = useAlert();
     const {theme} = useTheme();
 
-    const handleSubmit = ({handleClose})=>{
-        if(!email || !password || !confirmPassword){
+
+    const checkUsernameAvailability = async()=>{
+        const ref = db.collection('usernames');
+        const response = await ref.doc(username).get();
+        console.log(response.exists);
+        return !response.exists;
+    }
+
+    const handleSubmit = async ()=>{
+        if(!email || !password || !confirmPassword || !username ){
+ 
+            
             setAlert({
                 open: true,
                 type: 'warning',
@@ -33,7 +44,11 @@ const SignupForm = () => {
             return
         }
         
-        auth.createUserWithEmailAndPassword(email, password).then((response)=>{
+        if(await checkUsernameAvailability()){
+        auth.createUserWithEmailAndPassword(email, password).then(async (response)=>{
+            const ref = await db.collection('usernames').doc(username).set({
+                uid:  response.user.uid
+             });
             setAlert({
                 open: true,
                 type: 'success',
@@ -41,14 +56,25 @@ const SignupForm = () => {
             });
             handleClose();
         }).catch((err)=>{
-            console.log("sign up failed",err);
+            // console.log("sign up failed",err);
             setAlert({
                 open: true,
                 type: 'error',
                 message: errorMapping[err.code] || "Some error occurred please try again"
+                
             });
         });
     }
+    else{
+        setAlert({
+            open: true,
+            type: 'warning',
+            message: 'username taken'
+        });
+    }
+        
+    }
+    
 
 
   return (
@@ -76,7 +102,7 @@ const SignupForm = () => {
                     color: theme.title
                 }
             }}
-            onChange={(e)=>setEmail(e.target.value)}/>
+            onChange={(e)=>setUsername(e.target.value)}/>
 
         <TextField
             type='email'

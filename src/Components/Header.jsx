@@ -1,11 +1,16 @@
 import React from 'react'
 import AccountIcon from './AccountIcon.jsx'
-
+import CompareButton from './CompareButton.jsx'
 const Header = () => {
   return (
     <div className="header">
         <div className="logo">
-            LOGO
+            <span>
+              LOGO
+            </span>
+            <div>
+              <CompareButton/>
+            </div>
         </div>
         <div className="user-logo">
             <AccountIcon/>

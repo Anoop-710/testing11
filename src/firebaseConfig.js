@@ -14,7 +14,6 @@ import 'firebase/compat/firestore';
 
 
 
-
 const firebaseApp  = firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebaseApp.firestore();
