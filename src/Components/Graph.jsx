@@ -44,7 +44,7 @@ const Graph = ({graphData, type}) => {
                         
                     ]
                 }
-
+    
 
             }
         />

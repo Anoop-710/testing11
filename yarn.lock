@@ -8487,6 +8487,13 @@ react-firebase-hooks@^5.1.1:
   resolved "https://registry.yarnpkg.com/react-firebase-hooks/-/react-firebase-hooks-5.1.1.tgz#fc92bb4b860c6753c806583f64d7f069b6ee6785"
   integrity sha512-y2UpWs82xs+39q5Rc/wq316ca52QsC0n8m801V+yM4IC4hbfOL4yQPVSh7w+ydstdvjN9F+lvs1WrO2VYxpmdA==
 
+react-github-login-button@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-github-login-button/-/react-github-login-button-1.0.1.tgz#c866b14b02c7df9bf1c7aa8fb2901fbb9154b921"
+  integrity sha512-HXtYwgy8EwR9i+W5HgP1d/Ndf28AXLgc2l7TQwDQfn3Tf6PeS7xD0vqF+xGAfvqKOx6rFWP5E5wpAaoC8wzirw==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-google-button@^0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/react-google-button/-/react-google-button-0.7.2.tgz#5bb2bcb0d54e36da3cd3b712a6fac4f9209b764c"

@@ -29,20 +29,28 @@ const Footer = () => {
     <div className='footer'>
 
     
-      <div className="links">
-      <a href='https://github.com/'>
-          <GitHubIcon style={{marginRight:'4px'}}/>
-      </a>
-          
+      <div className="intructions">
+        <div className="hint">
+          press <kbd>TAB</kbd> to open commands
+        </div>
       </div>
-      <div className="themes">
-        <Select
-              options={themeOptions}
-              onChange={handleThemeChange}
-              menuPlacement='top'
-              defaultValue={{value:defaultTheme, label: defaultTheme.label}}
-              styles={customStyles}
-          />
+
+      <div className="actual-footer">
+        <div className="links">
+          <a href='https://github.com'>
+          <GitHubIcon style={{marginRight:'4px'}}/>
+          </a>
+
+        </div>
+
+        <div className="themes">  
+          <Select
+                options={themeOptions}
+                onChange={handleThemeChange}
+                menuPlacement='top'
+                defaultValue={{value:defaultTheme, label: defaultTheme.label}}
+            />
+        </div>
       </div>
         
 

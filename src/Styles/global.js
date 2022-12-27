@@ -26,7 +26,7 @@ body::-webkit-scrollbar{
     grid-auto-flow: row;
     grid-template-row: auto 1fr auto;
     gap: 0.5rem;
-    padding:1rem;
+    padding:2rem;
     width:100vw;
     text-align: center;
     align-items: center;
@@ -98,10 +98,16 @@ body::-webkit-scrollbar{
 
 .footer{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-self: end;
     width: 1000px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.actual-footer{
+    display: flex;
+    justify-content: space-between;
 }
 
 
@@ -159,6 +165,7 @@ a{
 .header{
     display: flex;
     width: 1000px;
+    align-self: stretch;
     margin-left: auto;
     margin-right: auto;
     justify-content: space-between;
@@ -182,6 +189,7 @@ a{
     border-radius: 20px;
     justify-content: center;
     align-text: center;
+    
 }
 .user{
     width: 50%;
@@ -191,6 +199,7 @@ a{
     font-size: 1.5rem;
     padding: 1rem;
     border-right: 2px solid;
+    
 }
 .info{
     width: 60%;
@@ -199,6 +208,7 @@ a{
 }
 .picture{
     width: 40%;
+    
 }
 .total-tests{
     width: 50%;
@@ -230,7 +240,31 @@ a{
     background: ${({theme})=>theme.title};
     padding: 0.3rem;
     border-radius: 5px;
-    margin
+    margin-top: 17px;
+}
 
-    
+#spanOr{
+    display: flex;
+    justify-content: center;
+}
+
+.spanOr{
+    margin-top: 10px;
+}
+
+.user-logo{
+    cursor: pointer;
+}
+.instruction{
+    color: ${({theme})=>theme.title};
+}
+.hint{
+    kbd{
+        background: ${({theme})=>theme.title};
+        color: ${({theme})=>theme.background};
+        padding: 2.5px 5px;
+        border-radius: 4px; 
+    }
+}
+
 `;

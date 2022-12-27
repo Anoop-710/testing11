@@ -143,7 +143,7 @@ const SignupForm = ({handleClose}) => {
         <TextField
             type='password'
             variant='outlined'
-            label='Enter Confirm Password'
+            label='Confirm Password'
 
             InputLabelProps={{
                 style:{

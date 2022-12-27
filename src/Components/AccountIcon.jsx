@@ -11,7 +11,8 @@ import {useAuthState} from 'react-firebase-hooks/auth';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import { useAlert } from '../Context/AlertContext';
-import { useTheme } from '../Context/ThemeContext'
+import { useTheme } from '../Context/ThemeContext';
+import GithubButton from 'react-github-login-button';
 
 const useStyles = makeStyles(()=>({
     modal: {
@@ -154,17 +155,18 @@ const AccountIcon = () => {
 
 
                 <Box>
-                    <span>OR</span>
+                    <span id='spanOr'>OR</span>
                     <GoogleButton
-                        style={{width:'100%',marginTop:'8px'}}
+                        style={{width:'80%',marginTop:'8px',marginRight: 'auto', marginLeft: 'auto'}}
                         onClick={signInWithGoogle}
                     />
                 </Box>
                 <Box>
-                    <span>OR</span>
-                    <div className='github-button' onClick={signInWithGithub}>
-                        Login with Github
-                    </div>
+                    <span id='spanOr' className='spanOr'>OR</span>
+                    <GithubButton className='github-button'
+                    style={{width:'80%',marginTop:'8px',marginRight: 'auto', marginLeft: 'auto'}}
+                    onClick={signInWithGithub}
+                    />
                 </Box>
 
 
