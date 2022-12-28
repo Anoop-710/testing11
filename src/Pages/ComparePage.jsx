@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { db,auth } from '../firebaseConfig';
 import Graph from '../Components/Graph';
+import { useNavigate } from 'react-router-dom';
 
 const ComparePage = () => {
     const {username} = useParams();
+    
+    const navigate = useNavigate();
+    
     const [loggedinUserData, setLoggedinUserData] = useState([]);
     const [loggedinUserGraphData, setLoggedinUserGraphData] = useState([]);
 
@@ -18,7 +22,7 @@ const ComparePage = () => {
     const getData = async()=>{
         const compareUserUID = await getUID();
         const {uid} = auth.currentUser;
-
+        console.log(uid.username+ "llllll");
         const resultsRef = db.collection('Results');
         let tempData = [];
         let tempGraphData = []
@@ -52,15 +56,23 @@ const ComparePage = () => {
         getData();
     },[]);
   return (
-    <div>
-        <div className="graph">
+    <>
+    <div className='compareHeader'>Compare data</div>
+    <div className='compareData'>
+        <div className="graph"><span id='currentUserGraph'>Your graph</span>
             <Graph graphData={loggedinUserGraphData} type='date'/>
         </div>
-        <div className="graph">
+        <div className="graph"><span id='comparedUserGraph'>{username}'s   graph</span>
             <Graph graphData={compareUserGraphData} type='date'/>
         </div>
 
     </div>
+    <div className='homeBtn'>
+        <button onClick={()=>navigate('/')}>Home</button>
+        <button onClick={()=>navigate('/user')}>User</button>
+    </div>
+    </>
+    
   )
 }
 

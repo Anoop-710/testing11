@@ -6,6 +6,7 @@ import Graph from '../Components/Graph';
 import UserInfo from '../Components/UserInfo';
 import { useTheme } from '../Context/ThemeContext';
 import { CircularProgress } from '@material-ui/core';
+import { useNavigate } from 'react-router-dom';
 
 const UserPage = () => {
 
@@ -14,6 +15,7 @@ const UserPage = () => {
     const [dataLoading, setDataLoading] = useState(true);
     const [user, loading] = useAuthState(auth);     //useAuthState hook checks if the firebase is loaded or not.Returns boolean value depending on the result.
 
+    const navigate = useNavigate();
     const {theme} = useTheme();
 
     const fetchUserData = ()=>{
@@ -58,6 +60,7 @@ const UserPage = () => {
     
 
   return (
+    <>
     <div className='canvas'>
         <UserInfo totalTestTaken={data.length}/>
         <div className="graph">
@@ -65,6 +68,9 @@ const UserPage = () => {
         </div>
         <ResultTable data={data}/>
     </div>
+    <button className='backHome' onClick={()=>navigate('/')}>Home</button>
+    </>
+    
   )
 }
 

@@ -1,7 +1,14 @@
 import React from 'react'
 import { useTestMode } from '../Context/TestModeContext'
+import Switch from '@mui/material/Switch';
+import { alpha, styled } from '@mui/material/styles';
+import { pink } from '@mui/material/colors';
 
 const UpperMenu = ({countDown, currWordIndex}) => {
+
+  // const [checked, setChecked] = React.useState(false);
+
+  
 
   const {setTestSeconds,setTestMode, testMode, setTestWords, testWords} = useTestMode();
 
@@ -18,6 +25,12 @@ const UpperMenu = ({countDown, currWordIndex}) => {
     setTestMode(e.target.id);
   }
 
+  const updateModeSwitch = () => {
+    setTestMode(testMode === 'time' ? 'word' : 'time');
+    
+  }
+  
+
   return (
     <div className="upper-menu">
       {(testMode==='time')?
@@ -31,9 +44,14 @@ const UpperMenu = ({countDown, currWordIndex}) => {
       </div>
       )
     }
-    <div className="modees">
-        <span className="mode" id='time' onClick={updateMode}> Time </span>
-        <span className="mode" id='word' onClick={updateMode}> Word </span>
+    <div className="modes">
+        <span className="mode" id='time' > Time </span>
+        
+        <Switch
+          onChange={updateModeSwitch}
+        />
+        <span className="mode" id='word'> Word </span>
+        
       </div>
 
         
@@ -44,9 +62,9 @@ const UpperMenu = ({countDown, currWordIndex}) => {
       </div>)
       :
       (<div className="word-modes">
-        <div className="no-of-word" id={10} onClick={updateWord}>10</div>
-        <div className="no-of-word" id={20} onClick={updateWord}>20</div>
-        <div className="no-of-word" id={30} onClick={updateWord}>30</div>
+        <div className="no-of-word" id={10} onClick={updateWord}>10w</div>
+        <div className="no-of-word" id={20} onClick={updateWord}>20w</div>
+        <div className="no-of-word" id={30} onClick={updateWord}>30w</div>
       </div>)}
     </div>
   )

@@ -11,11 +11,6 @@ import Header from "../Components/Header";
 
 var randomWords =  require('random-words');
 
-
- 
-
-
-
 const HomePage = () => {
     
     const words = randomWords(100);

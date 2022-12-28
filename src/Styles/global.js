@@ -121,9 +121,11 @@ body::-webkit-scrollbar{
 
 .left-stats{
     width: 30%;
-    padding: 30px
-
+    padding: 30px;
+    color: ${({theme})=>theme.typeBoxText};
 }
+
+
 .right-stats{
     width: 70%;
 }
@@ -151,15 +153,23 @@ a{
     font-size:1.35rem;
     padding:0.5rem;
 }
+
+.modes{
+    cursor: pointer;
+    
+}
 .time-modes .word-modes{
     display:flex;
-}
-.time .no-of-word{
-    margin-right:5px;
-}
-.time:hover .no-of-word:hover{
-    color:${({theme})=>theme.typeBoxText};
     cursor: pointer;
+}
+.time {
+    margin-right:5px;
+    cursor:pointer;
+}
+
+.no-of-word{
+    margin-right:5px;
+    cursor:pointer;
 }
 
 .header{
@@ -267,4 +277,71 @@ a{
     }
 }
 
+.restart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+    cursor: pointer;
+    font-size: 25px;    
+}
+
+
+.compareData{
+    height: 98vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -60px;
+}
+
+#currentUserGraph{
+    display: flex;
+    justify-content: start;
+    font-size: 30px;
+    margin-top: -40px;
+}
+
+#comparedUserGraph{
+    display: flex;
+    justify-content: start;
+    font-size: 30px;
+    margin-top: -40px;
+}
+
+.compareHeader{
+    text-align: center;
+    font-size: 40px;
+    margin-top: 20px;
+    text-decoration: underline;
+}
+
+.homeBtn{
+    text-align: center;
+    margin-top: -110px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+   
+}
+
+.homeBtn button{
+    background-color: ${({theme})=>theme.title};
+    font-size: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+}
+
+.backHome{
+    background-color: ${({theme})=>theme.title};
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    position: fixed;
+    top: 5%;
+    left: 4%;
+}
 `;

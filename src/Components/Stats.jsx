@@ -3,6 +3,7 @@ import Graph from './Graph'
 import {auth, db} from '../firebaseConfig';
 import { useAlert } from '../Context/AlertContext';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 const Stats = ({wpm, accuracy, correctChars, incorrectChars, missedChars, extraChars, graphData, resetTest}) => {
     var timeSet = new Set();        //Set allows us to store unique values
@@ -74,7 +75,7 @@ const Stats = ({wpm, accuracy, correctChars, incorrectChars, missedChars, extraC
     
   return (
     <div className='stats-box'>
-        <div className="left-stats"> WPM
+        <div className="left-stats wpm"> WPM
             <div className="title">
                 <div className="subtitle">
                     {wpm}
@@ -90,7 +91,7 @@ const Stats = ({wpm, accuracy, correctChars, incorrectChars, missedChars, extraC
                     {correctChars}/{incorrectChars}/{missedChars}/{extraChars}
                 </div>
             </div>
-            <div className='subtitle' onClick={resetTest}>Restart</div>
+            <div className='subtitle restart' onClick={resetTest}><RestartAltIcon />Restart</div>
         </div>
         <div className="right-stats">
             <Graph graphData ={newGraph} />
