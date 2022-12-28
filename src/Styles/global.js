@@ -151,13 +151,13 @@ a{
     font-size:1.35rem;
     padding:0.5rem;
 }
-.time-modes{
+.time-modes .word-modes{
     display:flex;
 }
-.time{
+.time .no-of-word{
     margin-right:5px;
 }
-.time:hover{
+.time:hover .no-of-word:hover{
     color:${({theme})=>theme.typeBoxText};
     cursor: pointer;
 }

@@ -4,7 +4,7 @@ import {auth, db} from '../firebaseConfig';
 import { useAlert } from '../Context/AlertContext';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-const Stats = ({wpm, accuracy, correctChars, incorrectChars, missedChars, extraChars, graphData,}) => {
+const Stats = ({wpm, accuracy, correctChars, incorrectChars, missedChars, extraChars, graphData, resetTest}) => {
     var timeSet = new Set();        //Set allows us to store unique values
     const {setAlert} = useAlert();
     const newGraph = graphData.filter((i)=>{
@@ -90,6 +90,7 @@ const Stats = ({wpm, accuracy, correctChars, incorrectChars, missedChars, extraC
                     {correctChars}/{incorrectChars}/{missedChars}/{extraChars}
                 </div>
             </div>
+            <div className='subtitle' onClick={resetTest}>Restart</div>
         </div>
         <div className="right-stats">
             <Graph graphData ={newGraph} />
