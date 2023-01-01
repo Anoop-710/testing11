@@ -3,6 +3,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 
+
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,

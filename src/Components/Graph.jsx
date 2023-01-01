@@ -42,13 +42,15 @@ const Graph = ({graphData, type}) => {
                             borderColor: theme.title,
                         },
                         
-                    ]
+                    ],
+
+                    
                 }
-    
+
 
             }
+ 
         />
-        
         
     </div>
   )

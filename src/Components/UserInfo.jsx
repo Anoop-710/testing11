@@ -6,7 +6,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 const UserInfo = ({totalTestTaken}) => {
 
     const [user] = useAuthState(auth);
-    console.log("user in userinfo", user);
+    
 
   return (
     <div className="user-profile">

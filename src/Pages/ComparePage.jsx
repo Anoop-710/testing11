@@ -22,7 +22,7 @@ const ComparePage = () => {
     const getData = async()=>{
         const compareUserUID = await getUID();
         const {uid} = auth.currentUser;
-        console.log(uid.username+ "llllll");
+        
         const resultsRef = db.collection('Results');
         let tempData = [];
         let tempGraphData = []

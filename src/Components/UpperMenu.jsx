@@ -1,8 +1,6 @@
 import React from 'react'
 import { useTestMode } from '../Context/TestModeContext'
 import Switch from '@mui/material/Switch';
-import { alpha, styled } from '@mui/material/styles';
-import { pink } from '@mui/material/colors';
 
 const UpperMenu = ({countDown, currWordIndex}) => {
 
@@ -45,12 +43,12 @@ const UpperMenu = ({countDown, currWordIndex}) => {
       )
     }
     <div className="modes">
-        <span className="mode" id='time' > Time </span>
+        <span className="mode" id='time' onClick={updateMode} > Time </span>
         
         <Switch
           onChange={updateModeSwitch}
         />
-        <span className="mode" id='word'> Word </span>
+        <span className="mode" id='word' onClick={updateMode} > Word </span>
         
       </div>
 
